@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de IMC</title>
+    <title>Cálculo del IMC</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Índice de Masa Corporal (IMC)</h1>
+        <h1>Cálculo del Índice de Masa Corporal (IMC)</h1>
         <div class="input-container">
             <label for="weight">Masa corporal (kg):</label>
             <input type="number" id="weight" min="0" step="0.01">
@@ -17,7 +17,7 @@
             <label for="height">Talla (cm):</label>
             <input type="number" id="height" min="0" step="0.01">
         </div>
-        <button onclick="calculateIMC()">Calcular IMC</button>
+        <button id="calculateButton">Calcular IMC</button>
         <div id="result" class="result"></div>
         <canvas id="myChart"></canvas>
     </div>
