@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", function() {
             datasets: [{
                 label: 'Relación Talla vs Masa Corporal',
                 data: [], // Inicialmente no hay datos
-                backgroundColor: '#007bff',
+                backgroundColor: 'rgba(0, 123, 255, 0.5)', // Color azul con transparencia
                 borderColor: '#007bff',
                 borderWidth: 1,
-                pointBackgroundColor: '#ff0', // Color de fondo del punto
+                pointBackgroundColor: '#007bff', // Color de fondo del punto
                 pointRadius: 5 // Tamaño del punto
             }]
         },
