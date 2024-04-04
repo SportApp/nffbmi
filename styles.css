@@ -7,7 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #222;
-    color: #ff0; /* Amarillo */
+    color: #ff0;
 }
 
 .container {
@@ -39,6 +39,6 @@ button:hover {
     margin-top: 20px;
 }
 
-.visualizer {
+canvas {
     margin-top: 20px;
 }
