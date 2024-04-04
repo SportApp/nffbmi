@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+    color: #ff0; /* Amarillo */
+}
+
+.container {
+    text-align: center;
+}
+
+.input-container {
+    margin-bottom: 10px;
+}
+
+input[type="number"], button {
+    margin: 10px;
+    padding: 5px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.visualizer {
+    margin-top: 20px;
+}
