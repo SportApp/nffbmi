@@ -14,88 +14,45 @@ function calculateIMC() {
     var imc = weight / (height * height);
     var message = 'Tu IMC es ' + imc.toFixed(1) + '. '; // Mostrar solo un decimal
 
-    if (imc < 18.5) {
-        message += 'Estás bajo peso.';
+    if (imc < 16) {
+        message += 'Delgadez severa.';
+    } else if (imc < 17) {
+        message += 'Delgadez moderada.';
+    } else if (imc < 18.5) {
+        message += 'Delgadez leve.';
+    } else if (imc < 22) {
+        message += 'Peso ciclista competición.';
     } else if (imc < 25) {
-        message += 'Tienes un peso saludable.';
+        message += 'Peso normal.';
     } else if (imc < 30) {
-        message += 'Tienes sobrepeso.';
+        message += 'Sobrepeso.';
+    } else if (imc < 35) {
+        message += 'Obesidad grado I.';
+    } else if (imc < 40) {
+        message += 'Obesidad grado II.';
     } else {
-        message += 'Tienes obesidad.';
+        message += 'Obesidad de grado III (obesidad mórbida).';
     }
 
     document.getElementById('result').innerHTML = message;
 
     // Dibujar el muñeco con más o menos barriga según el IMC
     var visualizer = document.getElementById('visualizer');
-    if (imc < 18.5) {
-        visualizer.innerHTML = '<img src="underweight.png" alt="Bajo peso">';
-    } else if (imc < 25) {
-        visualizer.innerHTML = '<img src="healthy.png" alt="Peso saludable">';
-    } else if (imc < 30) {
+    if (imc < 16) {
+        visualizer.innerHTML = '<img src="underweight.png" alt="Delgadez severa">';
+    } else if (imc < 18.5) {
+        visualizer.innerHTML = '<img src="underweight.png" alt="Delgadez leve">';
+    } else if (imc < 22) {
+        visualizer.innerHTML = '<img src="cyclist.png" alt="Peso ciclista competición">';
+   } else if (imc < 25) {
+        visualizer.innerHTML = '<img src="healthy.png" alt="Peso normal">';
+  } else if (imc < 30) {
         visualizer.innerHTML = '<img src="overweight.png" alt="Sobrepeso">';
+    } else if (imc < 35) {
+        visualizer.innerHTML = '<img src="obesity1.png" alt="Obesidad grado I">';
+    } else if (imc < 40) {
+        visualizer.innerHTML = '<img src="obesity2.png" alt="Obesidad grado II">';
     } else {
-        visualizer.innerHTML = '<img src="obese.png" alt="Obesidad">';
+        visualizer.innerHTML = '<img src="obesity3.png" alt="Obesidad de grado III">';
     }
-
-    // Obtener el contexto del canvas para la gráfica
-    var ctx = document.getElementById('myChart').getContext('2d');
-
-    // Crear un nuevo gráfico de dispersión (scatter plot)
-    var myChart = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Peso vs Altura',
-                data: [{x: height, y: weight}],
-                backgroundColor: 'rgba(54, 162, 235, 0.8)', // Color azul más claro
-                borderColor: 'rgba(54, 162, 235, 1)', // Color azul
-                borderWidth: 2,
-                pointRadius: 10, // Tamaño del punto
-                pointBackgroundColor: 'rgba(54, 162, 235, 1)' // Color del punto
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: 'Altura (cm)',
-                        font: {
-                            size: 14 // Tamaño de fuente del título del eje X
-                        },
-                        color: 'yellow' // Color del título del eje X
-                    },
-                    min: 150, // Rango mínimo para la altura
-                    max: 210, // Rango máximo para la altura
-                    ticks: {
-                        font: {
-                            size: 12 // Tamaño de fuente del eje X
-                        },
-                        color: 'yellow' // Color de los ticks del eje X
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Peso (kg)',
-                        font: {
-                            size: 14 // Tamaño de fuente del título del eje Y
-                        },
-                        color: 'yellow' // Color del título del eje Y
-                    },
-                    min: 40, // Rango mínimo para el peso
-                    max: 130, // Rango máximo para el peso
-                    ticks: {
-                        font: {
-                            size: 12 // Tamaño de fuente del eje Y
-                        },
-                        color: 'yellow' // Color de los ticks del eje Y
-                    }
-                }
-            }
-        }
-    });
 }
