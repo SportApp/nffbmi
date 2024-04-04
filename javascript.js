@@ -39,9 +39,9 @@ function calculateIMC() {
     // Dibujar el muñeco con más o menos barriga según el IMC
     var visualizer = document.getElementById('visualizer');
     if (imc < 16) {
-        visualizer.innerHTML = '<img src="underweight.png" alt="Delgadez severa">';
+        visualizer.innerHTML = '<img src="underweight1.png" alt="Delgadez severa">';
     } else if (imc < 18.5) {
-        visualizer.innerHTML = '<img src="underweight.png" alt="Delgadez leve">';
+        visualizer.innerHTML = '<img src="underweight2.png" alt="Delgadez leve">';
     } else if (imc < 22) {
         visualizer.innerHTML = '<img src="cyclist.png" alt="Peso ciclista competición">';
    } else if (imc < 25) {
