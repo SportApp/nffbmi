@@ -1,58 +1,90 @@
-function calculateIMC() {
-    var weight = parseFloat(document.getElementById('weight').value);
-    var height = parseFloat(document.getElementById('height').value);
+document.addEventListener("DOMContentLoaded", function() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Relación Talla vs Masa Corporal',
+                data: [], // Inicialmente no hay datos
+                backgroundColor: '#007bff',
+                borderColor: '#007bff',
+                borderWidth: 1,
+                pointBackgroundColor: '#ff0', // Color de fondo del punto
+                pointRadius: 5 // Tamaño del punto
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Masa Corporal (kg)',
+                        color: 'yellow'
+                    },
+                    min: 40,
+                    max: 160,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: 'yellow'
+                    },
+                    color: 'yellow'
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Talla (cm)',
+                        color: 'yellow'
+                    },
+                    min: 140,
+                    max: 210,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: 'yellow'
+                    },
+                    color: 'yellow'
+                }
+            }
+        }
+    });
 
-    if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
-        document.getElementById('result').innerHTML = 'Por favor, introduce un peso y altura válidos.';
-        document.getElementById('visualizer').innerHTML = '';
-        return;
+    function calculateIMC() {
+        var bodyMass = parseFloat(document.getElementById('weight').value);
+        var height = parseFloat(document.getElementById('height').value);
+
+        if (isNaN(bodyMass) || isNaN(height) || bodyMass <= 0 || height <= 0) {
+            document.getElementById('result').innerHTML = 'Por favor, introduce una masa corporal y talla válidas.';
+            return;
+        }
+
+        height = height / 100;
+
+        var imc = bodyMass / (height * height);
+        var message = 'Tu IMC es ' + imc.toFixed(1) + '. ';
+
+        if (imc < 16) {
+            message += 'Delgadez severa.';
+        } else if (imc < 18.5) {
+            message += 'Delgadez leve.';
+        } else if (imc < 25) {
+            message += 'Masa corporal normal.';
+        } else if (imc < 30) {
+            message += 'Sobrepeso.';
+        } else {
+            message += 'Obesidad.';
+        }
+
+        document.getElementById('result').innerHTML = message;
+
+        // Agregar el punto asociado a los parámetros introducidos al conjunto de datos del gráfico
+        chart.data.datasets[0].data.push({ x: bodyMass, y: height });
+
+        // Actualizar el gráfico
+        chart.update();
     }
 
-    // Convertir altura de cm a m
-    height = height / 100; // Convertir a metros
-
-    var imc = weight / (height * height);
-    var message = 'Tu IMC es ' + imc.toFixed(1) + '. '; // Mostrar solo un decimal
-
-    if (imc < 16) {
-        message += 'Delgadez severa.';
-    } else if (imc < 17) {
-        message += 'Delgadez moderada.';
-    } else if (imc < 18.5) {
-        message += 'Delgadez leve.';
-    } else if (imc < 22) {
-        message += 'Peso ciclista competición.';
-    } else if (imc < 25) {
-        message += 'Peso normal.';
-    } else if (imc < 30) {
-        message += 'Sobrepeso.';
-    } else if (imc < 35) {
-        message += 'Obesidad grado I.';
-    } else if (imc < 40) {
-        message += 'Obesidad grado II.';
-    } else {
-        message += 'Obesidad de grado III (obesidad mórbida).';
-    }
-
-    document.getElementById('result').innerHTML = message;
-
-    // Dibujar el muñeco con más o menos barriga según el IMC
-    var visualizer = document.getElementById('visualizer');
-    if (imc < 16) {
-        visualizer.innerHTML = '<img src="underweight1.png" alt="Delgadez severa">';
-    } else if (imc < 18.5) {
-        visualizer.innerHTML = '<img src="underweight2.png" alt="Delgadez leve">';
-    } else if (imc < 22) {
-        visualizer.innerHTML = '<img src="cyclist.png" alt="Peso ciclista competición">';
-   } else if (imc < 25) {
-        visualizer.innerHTML = '<img src="healthy.png" alt="Peso normal">';
-  } else if (imc < 30) {
-        visualizer.innerHTML = '<img src="overweight.png" alt="Sobrepeso">';
-    } else if (imc < 35) {
-        visualizer.innerHTML = '<img src="obesity1.png" alt="Obesidad grado I">';
-    } else if (imc < 40) {
-        visualizer.innerHTML = '<img src="obesity2.png" alt="Obesidad grado II">';
-    } else {
-        visualizer.innerHTML = '<img src="obesity3.png" alt="Obesidad de grado III">';
-    }
-}
+    document.getElementById('calculateButton').addEventListener('click', calculateIMC);
+});
